@@ -1,7 +1,7 @@
 // schema.prisma
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -11,47 +11,47 @@ datasource db {
 }
 
 model user {
-  id             String      @id @default(uuid())
-  name           String
-  email          String      @unique
-  password_hash  String
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  password_hash String
 
-  notificacao    notificacao[]
-  risco          risco[]
+  notificacao notificacao[]
+  risco       risco[]
 }
 
 model risco {
-  id                     String                @id @default(uuid())
+  id String @id @default(uuid())
 
-  impactoId              String                @unique
-  impacto                impacto               @relation(fields: [impactoId], references: [id])
+  impactoId String  @unique
+  impacto   impacto @relation(fields: [impactoId], references: [id])
 
-  estrategia_resolucaoId String                
-  estrategia_resolucao   estrategia_resolucao  @relation(fields: [estrategia_resolucaoId], references: [id])
+  estrategia_resolucaoId String
+  estrategia_resolucao   estrategia_resolucao @relation(fields: [estrategia_resolucaoId], references: [id])
 
-  userId                 String                
-  user                   user                  @relation(fields: [userId], references: [id])
+  userId String
+  user   user   @relation(fields: [userId], references: [id])
 
-  setorId                String                
-  setor                  setor                 @relation(fields: [setorId], references: [id])
+  setorId String
+  setor   setor  @relation(fields: [setorId], references: [id])
 
-  plano_de_acaoId        String                @unique
-  plano_de_acao          plano_de_acao         @relation(fields: [plano_de_acaoId], references: [id])
+  plano_de_acaoId String        @unique
+  plano_de_acao   plano_de_acao @relation(fields: [plano_de_acaoId], references: [id])
 
-  titulo                 String
-  desc                   String
+  titulo String
+  desc   String
 
-  notificacao            notificacao[]
+  notificacao notificacao[]
 }
 
 model notificacao {
-  id               String      @id @default(uuid())
-  
-  riscoId          String      
-  risco            risco       @relation(fields: [riscoId], references: [id])
+  id String @id @default(uuid())
 
-  userId           String
-  user             user        @relation(fields: [userId], references: [id])
+  riscoId String
+  risco   risco  @relation(fields: [riscoId], references: [id])
+
+  userId String
+  user   user   @relation(fields: [userId], references: [id])
 
   titulo           String
   nome             String
@@ -62,10 +62,10 @@ model notificacao {
 }
 
 model plano_de_acao {
-  id               String              @id @default(uuid())
+  id String @id @default(uuid())
 
-  risco_residualId String              @unique
-  risco_residual   risco_residual      @relation(fields: [risco_residualId], references: [id])
+  risco_residualId String         @unique
+  risco_residual   risco_residual @relation(fields: [risco_residualId], references: [id])
 
   titulo           String
   desc             String
@@ -76,57 +76,57 @@ model plano_de_acao {
   dataFim          DateTime
   comentarios      String
 
-  risco            risco?
+  risco risco?
 }
 
 model classificacao {
-  id               String             @id @default(uuid())
-  label            String             @unique
+  id    String @id @default(uuid())
+  label String @unique
 
-  impacto          impacto[]
-  risco_residual   risco_residual[]
+  impacto        impacto[]
+  risco_residual risco_residual[]
 }
 
 model risco_residual {
-  id               String              @id @default(uuid())
+  id String @id @default(uuid())
 
-  classificacaoId  String
-  classificacao    classificacao       @relation(fields: [classificacaoId], references: [id])
+  classificacaoId String
+  classificacao   classificacao @relation(fields: [classificacaoId], references: [id])
 
-  riscoMitigado    Boolean
-  dataResolucao    DateTime
+  riscoMitigado Boolean
+  dataResolucao DateTime
 
-  plano_de_acao    plano_de_acao?
+  plano_de_acao plano_de_acao?
 }
 
 model impacto {
-  id               String              @id @default(uuid())
+  id String @id @default(uuid())
 
-  classificacaoId  String
-  classificacao    classificacao       @relation(fields: [classificacaoId], references: [id])
+  classificacaoId String
+  classificacao   classificacao @relation(fields: [classificacaoId], references: [id])
 
-  desc             String
+  desc String
 
-  risco            risco?
+  risco risco?
 }
 
 model estrategia_resolucao {
-  id               String              @id @default(uuid())
-  label            String              @unique
+  id    String @id @default(uuid())
+  label String @unique
 
-  risco            risco[]
+  risco risco[]
 }
 
 model setor {
-  id               String              @id @default(uuid())
-  label            String
+  id    String @id @default(uuid())
+  label String
 
-  risco            risco[]
+  risco risco[]
 }
 
 model category {
-  id               String              @id @default(uuid())
-  nome             String
-  desc             String
-  created_at       DateTime            @default(now())
+  id         String   @id @default(uuid())
+  nome       String
+  desc       String
+  created_at DateTime @default(now())
 }

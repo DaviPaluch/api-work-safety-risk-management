@@ -1,6 +1,5 @@
 // categories.routes.ts
 import { Router, Request, Response } from "express";
-import multer from "multer";
 import { createCategoryController } from "../modules/cars/useCases/categories/createCategory/index";
 
 const categoriesRoutes = Router();
