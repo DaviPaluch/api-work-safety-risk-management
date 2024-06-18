@@ -27,7 +27,8 @@ class RiscoRepository implements IRiscoRepository {
         titulo: titulo,
         desc: desc,
         setorId: setorId,
-        plano_de_acaoId: plano_de_acaoId
+        plano_de_acaoId: plano_de_acaoId,
+        status_riscoId: "adicionar nas dtos de request"
       }
     });
   }

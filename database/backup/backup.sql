@@ -17,7 +17,7 @@ INSERT INTO setor (id, label) VALUES
   ('8', 'Vendas e Marketing');
 
 -- pessoa
-INSERT INTO user (nome,email,senha) VALUES
+INSERT INTO user (nome,email,password_hash) VALUES
   ('Davi Paluch','davi@email.com','a1234567@')
 
 INSERT INTO estrategia_resolucao (id, label) VALUES

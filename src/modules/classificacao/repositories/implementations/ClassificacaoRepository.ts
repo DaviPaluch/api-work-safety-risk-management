@@ -9,6 +9,10 @@ class ClassificacaoRepository implements IClassificacaoRepository {
   constructor() {
     this.prisma = new PrismaClient();
   }
+  async getById(id): Promise<{ id: string; label: string; }> {
+    const classificacao = await this.prisma.classificacao.findUnique({ where: { id } });
+    return classificacao;
+  }
 
   async list(): Promise<classificacao[]> {
     const classificacao = await this.prisma.classificacao.findMany();

@@ -5,7 +5,6 @@ import { createCategoryController } from "../modules/cars/useCases/categories/cr
 const categoriesRoutes = Router();
 
 categoriesRoutes.post("/", (request: Request, response: Response) => {
-  console.log("panda")
   return createCategoryController.handle(request, response)
 })
 

@@ -19,7 +19,7 @@ COPY .env .env
 RUN npx prisma generate
 
 # Adicione o comando para aplicar as migrações
-RUN npx prisma migrate dev
+RUN npx prisma migrate deploy
 
 # Exponha a porta
 EXPOSE 3000

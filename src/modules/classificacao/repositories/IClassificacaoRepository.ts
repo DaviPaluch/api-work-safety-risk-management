@@ -7,6 +7,7 @@ import { classificacao } from "@prisma/client";
 
 
 interface IClassificacaoRepository {
+  getById(id: string): Promise<classificacao>
   list(): Promise<classificacao[]>
 }
 
