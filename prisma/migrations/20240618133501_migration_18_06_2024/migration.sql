@@ -15,11 +15,20 @@ CREATE TABLE "risco" (
     "estrategia_resolucaoId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "setorId" TEXT NOT NULL,
-    "plano_de_acaoId" TEXT NOT NULL,
+    "plano_de_acaoId" TEXT,
+    "status_riscoId" TEXT NOT NULL,
     "titulo" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
 
     CONSTRAINT "risco_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "status_risco" (
+    "id" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+
+    CONSTRAINT "status_risco_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -41,6 +50,7 @@ CREATE TABLE "notificacao" (
 CREATE TABLE "plano_de_acao" (
     "id" TEXT NOT NULL,
     "risco_residualId" TEXT NOT NULL,
+    "status_prazoId" TEXT NOT NULL,
     "titulo" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
     "dataAlerta" TIMESTAMP(3) NOT NULL,
@@ -51,6 +61,14 @@ CREATE TABLE "plano_de_acao" (
     "comentarios" TEXT NOT NULL,
 
     CONSTRAINT "plano_de_acao_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "status_prazo" (
+    "id" TEXT NOT NULL,
+    "label" TEXT NOT NULL,
+
+    CONSTRAINT "status_prazo_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -137,7 +155,10 @@ ALTER TABLE "risco" ADD CONSTRAINT "risco_userId_fkey" FOREIGN KEY ("userId") RE
 ALTER TABLE "risco" ADD CONSTRAINT "risco_setorId_fkey" FOREIGN KEY ("setorId") REFERENCES "setor"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "risco" ADD CONSTRAINT "risco_plano_de_acaoId_fkey" FOREIGN KEY ("plano_de_acaoId") REFERENCES "plano_de_acao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "risco" ADD CONSTRAINT "risco_plano_de_acaoId_fkey" FOREIGN KEY ("plano_de_acaoId") REFERENCES "plano_de_acao"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "risco" ADD CONSTRAINT "risco_status_riscoId_fkey" FOREIGN KEY ("status_riscoId") REFERENCES "status_risco"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "notificacao" ADD CONSTRAINT "notificacao_riscoId_fkey" FOREIGN KEY ("riscoId") REFERENCES "risco"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -147,6 +168,9 @@ ALTER TABLE "notificacao" ADD CONSTRAINT "notificacao_userId_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "plano_de_acao" ADD CONSTRAINT "plano_de_acao_risco_residualId_fkey" FOREIGN KEY ("risco_residualId") REFERENCES "risco_residual"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "plano_de_acao" ADD CONSTRAINT "plano_de_acao_status_prazoId_fkey" FOREIGN KEY ("status_prazoId") REFERENCES "status_prazo"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "risco_residual" ADD CONSTRAINT "risco_residual_classificacaoId_fkey" FOREIGN KEY ("classificacaoId") REFERENCES "classificacao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

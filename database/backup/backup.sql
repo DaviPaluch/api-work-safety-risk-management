@@ -5,7 +5,6 @@ INSERT INTO classificacao (id, label) VALUES ('3', 'moderado');
 INSERT INTO classificacao (id, label) VALUES ('4', 'severo');
 INSERT INTO classificacao (id, label) VALUES ('5', 'critico');
 
-
 -- setores
 INSERT INTO setor (id, label) VALUES
   ('1', 'Produção/Manufatura'),

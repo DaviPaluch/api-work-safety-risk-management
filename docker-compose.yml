@@ -14,20 +14,20 @@ services:
     volumes:
       - pgdata:/data/postgres
 
-  # app:
-  #   build: .
-  #   container_name: gestr
-  #   restart: always
-  #   ports: 
-  #     - 3000:3000
-  #   volumes: 
-  #     - .:/usr/app
-  #     - /usr/app/node_modules # Montar o diretório node_modules como um volume separado
-  #     - /usr/app/node_modules/.prisma/client # Montar o diretório .prisma como um volume separado
-  #   links:
-  #     - database
-  #   depends_on:
-  #     - database
+  app:
+    build: .
+    container_name: gestr
+    restart: always
+    ports: 
+      - 3000:3000
+    volumes: 
+      - .:/usr/app
+      - /usr/app/node_modules # Montar o diretório node_modules como um volume separado
+      - /usr/app/node_modules/.prisma/client # Montar o diretório .prisma como um volume separado
+    links:
+      - database
+    depends_on:
+      - database
 
 volumes:
   pgdata:
