@@ -35,8 +35,8 @@ model risco {
   setorId String
   setor   setor  @relation(fields: [setorId], references: [id])
 
-  plano_de_acaoId String        @unique
-  plano_de_acao   plano_de_acao @relation(fields: [plano_de_acaoId], references: [id])
+  plano_de_acaoId String?         @unique
+  plano_de_acao   plano_de_acao?  @relation(fields: [plano_de_acaoId], references: [id])
 
   titulo String
   desc   String

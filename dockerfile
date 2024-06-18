@@ -1,7 +1,30 @@
 FROM node
-WORKDIR ./usr/app
-COPY package.json ./
+
+# Defina o diretório de trabalho
+WORKDIR /usr/app
+
+# Copie os arquivos package.json e package-lock.json
+COPY package*.json ./
+
+# Instale as dependências
 RUN npm install
+
+# Copie o restante do código para o contêiner
 COPY . .
-EXPOSE 3333
-CMD [ "npm","run","dev" ]
+
+# Copie o arquivo .env para o contêiner
+COPY .env .env
+
+# Gere os arquivos do Prisma
+RUN npx prisma generate
+
+# Adicione o comando para aplicar as migrações
+RUN npx prisma migrate deploy
+
+# Exponha a porta
+EXPOSE 3000
+
+
+# Comando para iniciar a aplicação
+CMD ["npm", "run", "dev"]
+
