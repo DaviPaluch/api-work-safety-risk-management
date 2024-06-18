@@ -1,4 +1,9 @@
+# Usando a imagem node como base
 FROM node
+
+# Instalar dockerize
+RUN apt-get update && apt-get install -y wget
+RUN wget -qO- https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz | tar -C /usr/local/bin -xzv
 
 # Defina o diretório de trabalho
 WORKDIR /usr/app
@@ -15,16 +20,8 @@ COPY . .
 # Copie o arquivo .env para o contêiner
 COPY .env .env
 
-# Gere os arquivos do Prisma
-RUN npx prisma generate
-
-# Adicione o comando para aplicar as migrações
-RUN npx prisma migrate deploy
-
 # Exponha a porta
 EXPOSE 3000
 
-
 # Comando para iniciar a aplicação
-CMD ["npm", "run", "dev"]
-
+CMD ["dockerize", "-wait", "tcp://database:5432", "-timeout", "60s", "sh", "-c", "npx prisma generate && npx prisma migrate deploy && npm run dev"]

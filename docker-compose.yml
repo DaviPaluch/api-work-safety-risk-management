@@ -12,22 +12,30 @@ services:
       - POSTGRES_PASSWORD=docker
       - POSTGRES_DB=renalt
     volumes:
-      - pgdata:/data/postgres
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
-  # app:
-  #   build: .
-  #   container_name: gestr
-  #   restart: always
-  #   ports: 
-  #     - 3000:3000
-  #   volumes: 
-  #     - .:/usr/app
-  #     - /usr/app/node_modules # Montar o diretório node_modules como um volume separado
-  #     - /usr/app/node_modules/.prisma/client # Montar o diretório .prisma como um volume separado
-  #   links:
-  #     - database
-  #   depends_on:
-  #     - database
+  app:
+    build: .
+    container_name: gestr
+    restart: always
+    ports: 
+      - 3000:3000
+    volumes: 
+      - .:/usr/app
+      - /usr/app/node_modules # Montar o diretório node_modules como um volume separado
+      - /usr/app/node_modules/.prisma/client # Montar o diretório .prisma como um volume separado
+    links:
+      - database
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://docker:docker@database:5432/renalt
 
 volumes:
   pgdata:
