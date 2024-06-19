@@ -4,26 +4,29 @@ import { risco } from "@prisma/client";
 
 // DTO => Data transfer object
 interface ICreateRiscoDTO {
-  impactoId: string;
   estrategia_resolucaoId: string;
   userId: string;
+  setorId: string;
+  status_riscoId: string;
+  classificacaoId: string;
   titulo: string;
   desc: string;
-  setorId: string;
-  plano_de_acaoId: string;
+  descImpacto: string
 }
 
 interface IRiscoRepository {
   // findByName(name: string): Promise<risco | null>
   list(): Promise<risco[]>
   create({
-    impactoId,
     estrategia_resolucaoId,
     userId,
+    setorId,
+    status_riscoId,
+    classificacaoId,
     titulo,
     desc,
-    setorId,
-    plano_de_acaoId, }: ICreateRiscoDTO): Promise<void>
+    descImpacto
+  }: ICreateRiscoDTO): Promise<void>
 }
 
 export { IRiscoRepository, ICreateRiscoDTO }

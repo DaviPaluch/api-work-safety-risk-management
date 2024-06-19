@@ -2,32 +2,35 @@
 
 import { Request, Response } from "express";
 import { CreateRiscoUseCase } from "./CreateRiscoUseCase";
+import { container } from "tsyringe";
 
 class CreateRiscoController {
 
-  constructor(private createCategoryUseCase: CreateRiscoUseCase) { }
-
   async handle(req: Request, res: Response): Promise<Response> {
     const {
-      impactoId,
       estrategia_resolucaoId,
       userId,
+      setorId,
+      status_riscoId,
+      classificacaoId,
       titulo,
       desc,
-      setorId,
-      plano_de_acaoId
+      descImpacto
     } = req.body;
 
     try {
-      await this.createCategoryUseCase.execute({
-        impactoId,
+      const createCategoryUseCase = container.resolve(CreateRiscoUseCase)
+      await createCategoryUseCase.execute({
         estrategia_resolucaoId,
         userId,
+        setorId,
+        status_riscoId,
+        classificacaoId,
         titulo,
         desc,
-        setorId,
-        plano_de_acaoId,
+        descImpacto
       });
+
       return res.status(201).send("Salvo com sucesso.");
     } catch (err) {
       return res.status(400).json({ error: err.message });

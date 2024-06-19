@@ -1,39 +1,46 @@
 // CreateCategoryUseCase.ts
 
+import { inject, injectable } from "tsyringe";
 import { RiscoRepository } from "../../repositories/implementations/RiscoRepository"
 
 interface IRequest {
-  impactoId: string;
   estrategia_resolucaoId: string;
   userId: string;
+  setorId: string;
+  status_riscoId: string;
+  classificacaoId: string;
   titulo: string;
   desc: string;
-  setorId: string;
-  plano_de_acaoId: string;
+  descImpacto: string
 }
 
+
+@injectable()
 class CreateRiscoUseCase {
 
-  constructor(private riscoRepository: RiscoRepository) { }
+  constructor(
+    @inject("RiscoRepository")
+    private riscoRepository: RiscoRepository) { }
 
   async execute({
-    impactoId,
     estrategia_resolucaoId,
     userId,
+    setorId,
+    status_riscoId,
+    classificacaoId,
     titulo,
     desc,
-    setorId,
-    plano_de_acaoId
+    descImpacto
   }: IRequest): Promise<void> {
-
     await this.riscoRepository.create({
-      impactoId,
       estrategia_resolucaoId,
       userId,
+      setorId,
+      status_riscoId,
+      classificacaoId,
       titulo,
       desc,
-      setorId,
-      plano_de_acaoId
+      descImpacto
     });
   }
 }

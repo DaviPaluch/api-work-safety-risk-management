@@ -11,24 +11,25 @@ class RiscoRepository implements IRiscoRepository {
   }
 
   async create({
-    impactoId,
     estrategia_resolucaoId,
     userId,
+    setorId,
+    status_riscoId,
+    classificacaoId,
     titulo,
     desc,
-    setorId,
-    plano_de_acaoId,
+    descImpacto
   }: ICreateRiscoDTO): Promise<void> {
+    const impacto = await this.prisma.impacto.create({ data: { desc: descImpacto, classificacaoId: classificacaoId } })
     await this.prisma.risco.create({
       data: {
-        impactoId: impactoId,
+        impactoId: impacto.id,
         estrategia_resolucaoId: estrategia_resolucaoId,
         userId: userId,
+        setorId: setorId,
+        status_riscoId: status_riscoId,
         titulo: titulo,
         desc: desc,
-        setorId: setorId,
-        plano_de_acaoId: plano_de_acaoId,
-        status_riscoId: "adicionar nas dtos de request"
       }
     });
   }

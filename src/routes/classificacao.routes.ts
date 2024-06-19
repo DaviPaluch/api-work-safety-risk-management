@@ -1,17 +1,15 @@
 // categories.routes.ts
 import { Router, Request, Response } from "express";
-import { listClassificacaoController } from "../modules/classificacao/useCases/listClassificacao/index";
-import { getClassificacaoController } from '../modules/classificacao/useCases/get/index'
+import { ListClassificacaoController } from "../modules/classificacao/useCases/listClassificacao/ListClassificacaoController";
+import { GetClassificacaoController } from "../modules/classificacao/useCases/get/GetClassificacaoController";
 
 
 const classificacaoRoutes = Router();
+const getClassificacaoController = new GetClassificacaoController()
+const listClassificacaoController = new ListClassificacaoController()
 
-classificacaoRoutes.get("/", (request: Request, response: Response) => {
-  return getClassificacaoController.handle(request, response)
-})
+classificacaoRoutes.get("/", getClassificacaoController.handle)
+classificacaoRoutes.get("/list", listClassificacaoController.handle)
 
-classificacaoRoutes.get("/list", (request: Request, response: Response) => {
-  return listClassificacaoController.handle(request, response)
-})
 
 export { classificacaoRoutes } 
