@@ -143,10 +143,3 @@ model setor {
 
   risco risco[]
 }
-
-model category {
-  id         String   @id @default(uuid())
-  nome       String
-  desc       String
-  created_at DateTime @default(now())
-}

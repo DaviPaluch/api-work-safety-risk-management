@@ -1,12 +1,14 @@
 // categories.routes.ts
-import { Router, Request, Response } from "express";
-import { createCategoryController } from "../modules/cars/useCases/categories/createCategory/index";
-
-const categoriesRoutes = Router();
-
-categoriesRoutes.post("/", (request: Request, response: Response) => {
-  return createCategoryController.handle(request, response)
-})
+import { Router } from "express";
+import { CreateUserCrontroller } from "../modules/user/useCases/createUser/createUserController";
 
 
-export { categoriesRoutes }
+const userRoutes = Router();
+const createUserCrontroller = new CreateUserCrontroller()
+
+
+userRoutes.post("/", createUserCrontroller.handle)
+
+
+
+export { userRoutes } 

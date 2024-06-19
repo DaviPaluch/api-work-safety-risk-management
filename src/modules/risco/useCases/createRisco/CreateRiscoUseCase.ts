@@ -1,7 +1,7 @@
 // CreateCategoryUseCase.ts
 
 import { inject, injectable } from "tsyringe";
-import { RiscoRepository } from "../../repositories/implementations/RiscoRepository"
+import { IRiscoRepository } from "../../repositories/IRiscoRepository";
 
 interface IRequest {
   estrategia_resolucaoId: string;
@@ -20,7 +20,7 @@ class CreateRiscoUseCase {
 
   constructor(
     @inject("RiscoRepository")
-    private riscoRepository: RiscoRepository) { }
+    private riscoRepository: IRiscoRepository) { }
 
   async execute({
     estrategia_resolucaoId,
