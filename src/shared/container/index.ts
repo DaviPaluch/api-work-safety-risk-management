@@ -5,6 +5,8 @@ import { IRiscoRepository } from "../../modules/risco/repositories/IRiscoReposit
 import { RiscoRepository } from "../../modules/risco/repositories/implementations/RiscoRepository";
 import { IUserRepository } from "../../modules/user/repositories/IUserRepository";
 import { UserRepository } from "../../modules/user/repositories/implementations/UserRepository";
+import { INotificacaoRepository } from "../../modules/notificacao/repositories/INotificacaoRepository";
+import { NotificacaoRepository } from "../../modules/notificacao/repositories/implementations/NotificacaoRepository";
 
 container.registerSingleton<IClassificacaoRepository>(
   "ClassificacaoRepository",
@@ -17,4 +19,8 @@ container.registerSingleton<IRiscoRepository>(
 container.registerSingleton<IUserRepository>(
   "UserRepository",
   UserRepository
+);
+container.registerSingleton<INotificacaoRepository>(
+  "NotificacaoRepository",
+  NotificacaoRepository
 );

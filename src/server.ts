@@ -1,10 +1,12 @@
 // server.ts
 import 'reflect-metadata'
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
+import 'express-async-errors'
 import swaggerUi from 'swagger-ui-express'
 import swaggerFile from './swagger.json'
 import { router } from './routes'
 import './shared/container'
+import { AppError } from './err/AppError'
 
 
 const server = express()
@@ -19,6 +21,14 @@ server.get("/", (req, res) => {
   return res.send("hello")
 })
 
+server.use(
+  (err: Error, req: Request, res: Response, next: NextFunction) => {
+    if (err instanceof AppError) {
+      return res.status(err.statusCode).json({ message: err.message })
+    }
+
+    return res.status(500).json({ status: "error", message: `Internal server error - ${err.message}` })
+  })
+
 
 server.listen(3000, () => console.log("server is running..."))
-
