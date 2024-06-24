@@ -1,6 +1,7 @@
 import { container } from "tsyringe"
 import { CreateUserUseCase } from "./createUserUseCase"
 import { Request, Response } from "express"
+import { stat } from "fs"
 
 
 class CreateUserCrontroller {
@@ -8,15 +9,15 @@ class CreateUserCrontroller {
     const { name, email, password_hash } = req.body
     try {
       const createUserUseCase = container.resolve(CreateUserUseCase)
-      await createUserUseCase.execute({
+      const status = await createUserUseCase.execute({
         name,
         email,
         password_hash
       })
 
-      return res.status(201).send("Salvo com sucesso.");
+      return res.status(201).send("Salvo com sucesso.").json({status:"200"});
     } catch (err) {
-      return res.status(400).json({ error: err.message });
+      return res.status(400).json({ status:"400" });
     }
   }
 }
