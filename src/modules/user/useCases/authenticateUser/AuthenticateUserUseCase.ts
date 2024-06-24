@@ -10,10 +10,12 @@ interface IRequest {
 }
 interface IResponse {
   user: {
+    id:string,
     name: string,
     email: string
   }
-  token: string
+  token: string,
+  status:string
 }
 
 @injectable()
@@ -37,7 +39,7 @@ class AuthenticateUserUseCase {
       expiresIn: "1d"
     })
 
-    return { user: { name: user.name, email: user.email }, token }
+    return { user: { id: user.id,name: user.name, email: user.email }, token, status:"OK" }
   }
 }
 
