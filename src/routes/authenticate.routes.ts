@@ -7,7 +7,7 @@ const authRoutes = Router();
 const getAuthenticateUserController = new AuthenticateUserController()
 
 
-authRoutes.get("/", getAuthenticateUserController.handle)
+authRoutes.patch("/", getAuthenticateUserController.handle)
 
 
 
