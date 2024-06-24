@@ -9,6 +9,8 @@ import { INotificacaoRepository } from "../../modules/notificacao/repositories/I
 import { NotificacaoRepository } from "../../modules/notificacao/repositories/implementations/NotificacaoRepository";
 import { ISetorRepository } from "../../modules/setor/repositories/ISetorRepository";
 import { SetorRepository } from "../../modules/setor/repositories/implementations/SetorRepository";
+import { IStatusRiscoRepository } from "../../modules/statusRisco/repositories/IStatusRiscoRepository";
+import { StatusRiscoRepository } from "../../modules/statusRisco/repositories/implementations/StatusRiscoRepository";
 
 container.registerSingleton<IClassificacaoRepository>(
   "ClassificacaoRepository",
@@ -29,4 +31,8 @@ container.registerSingleton<INotificacaoRepository>(
 container.registerSingleton<ISetorRepository>(
   "SetorRepository",
   SetorRepository
+);
+container.registerSingleton<IStatusRiscoRepository>(
+  "StatusRiscoRepository",
+  StatusRiscoRepository
 );
