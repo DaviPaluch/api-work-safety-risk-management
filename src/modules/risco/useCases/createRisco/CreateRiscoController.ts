@@ -31,7 +31,7 @@ class CreateRiscoController {
         descImpacto
       });
 
-      return res.status(201).send("Salvo com sucesso.");
+      return res.status(201).json({status:"201"});
     } catch (err) {
       return res.status(400).json({ error: err.message });
     }
