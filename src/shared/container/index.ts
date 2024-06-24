@@ -7,6 +7,8 @@ import { IUserRepository } from "../../modules/user/repositories/IUserRepository
 import { UserRepository } from "../../modules/user/repositories/implementations/UserRepository";
 import { INotificacaoRepository } from "../../modules/notificacao/repositories/INotificacaoRepository";
 import { NotificacaoRepository } from "../../modules/notificacao/repositories/implementations/NotificacaoRepository";
+import { ISetorRepository } from "../../modules/setor/repositories/ISetorRepository";
+import { SetorRepository } from "../../modules/setor/repositories/implementations/SetorRepository";
 
 container.registerSingleton<IClassificacaoRepository>(
   "ClassificacaoRepository",
@@ -23,4 +25,8 @@ container.registerSingleton<IUserRepository>(
 container.registerSingleton<INotificacaoRepository>(
   "NotificacaoRepository",
   NotificacaoRepository
+);
+container.registerSingleton<ISetorRepository>(
+  "SetorRepository",
+  SetorRepository
 );
