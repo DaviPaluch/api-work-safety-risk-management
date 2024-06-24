@@ -9,13 +9,13 @@ class CreateUserCrontroller {
     const { name, email, password_hash } = req.body
     try {
       const createUserUseCase = container.resolve(CreateUserUseCase)
-      const status = await createUserUseCase.execute({
+      await createUserUseCase.execute({
         name,
         email,
         password_hash
       })
 
-      return res.status(201).send("Salvo com sucesso.").json({status:"200"});
+      return res.status(201).json({status:"201"});
     } catch (err) {
       return res.status(400).json({ status:"400" });
     }
