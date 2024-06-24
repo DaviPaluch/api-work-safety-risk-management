@@ -39,7 +39,7 @@ class AuthenticateUserUseCase {
       expiresIn: "1d"
     })
 
-    return { user: { id: user.id,name: user.name, email: user.email }, token, status:"OK" }
+    return { user: { id: user.id,name: user.name, email: user.email }, token, status:"200" }
   }
 }
 
