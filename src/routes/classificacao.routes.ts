@@ -9,7 +9,7 @@ const classificacaoRoutes = Router();
 const getClassificacaoController = new GetClassificacaoController()
 const listClassificacaoController = new ListClassificacaoController()
 
-classificacaoRoutes.use(ensureAuthenticated)
+//classificacaoRoutes.use(ensureAuthenticated)
 classificacaoRoutes.get("/", getClassificacaoController.handle)
 classificacaoRoutes.get("/list", listClassificacaoController.handle)
 
