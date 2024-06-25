@@ -24,7 +24,7 @@ server.get("/", (req, res) => {
 server.use(
   (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof AppError) {
-      return res.status(err.statusCode).json({ err: err.message })
+      return res.status(err.statusCode).json({ status: 400, err: err.message })
     }
 
     return res.status(500).json({ status: "error", message: `Internal server error - ${err.message}` })
