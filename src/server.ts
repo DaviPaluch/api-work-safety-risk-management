@@ -7,6 +7,7 @@ import swaggerFile from './swagger.json'
 import { router } from './routes'
 import './shared/container'
 import { AppError } from './err/AppError'
+import { CadastroError } from './err/CadastroError'
 
 
 const server = express()
@@ -25,6 +26,9 @@ server.use(
   (err: Error, req: Request, res: Response, next: NextFunction) => {
     if (err instanceof AppError) {
       return res.status(err.statusCode).json({ status: 400, err: err.message })
+    }
+    if (err instanceof CadastroError) {
+      return res.status(err.status).json({ status: 400, err: err.message })
     }
 
     return res.status(500).json({ status: "error", message: `Internal server error - ${err.message}` })

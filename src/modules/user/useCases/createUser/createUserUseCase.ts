@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe"
 import { ICreateUserDTO, IUserRepository } from '../../repositories/IUserRepository'
 import { hash } from "bcrypt"
 import { AppError } from "../../../../err/AppError"
+import { CadastroError } from "../../../../err/CadastroError"
 
 interface IRequest {
   name: string,
@@ -26,7 +27,7 @@ class CreateUserUseCase {
     const alreadyExists = await this.userRepository.findByEmail(email)
 
     if (alreadyExists) {
-      throw new AppError("Usuário já existe", 401)
+      throw new CadastroError("Usuário já existe", 401)
     }
 
     await this.userRepository.create({
