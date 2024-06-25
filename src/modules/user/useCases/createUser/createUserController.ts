@@ -15,9 +15,9 @@ class CreateUserCrontroller {
         password_hash
       })
 
-      return res.status(201).json({ status: "201" });
+      return res.status(201).json({ status: "201", err: "" });
     } catch (err) {
-      return res.status(400).json(err);
+      return res.status(400).send(err.message);
     }
   }
 }

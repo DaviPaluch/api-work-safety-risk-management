@@ -27,7 +27,7 @@ class CreateUserUseCase {
     const alreadyExists = await this.userRepository.findByEmail(email)
 
     if (alreadyExists) {
-      throw new CadastroError("Usuário já existe", 401)
+      throw new CadastroError("Usuário já existe")
     }
 
     await this.userRepository.create({

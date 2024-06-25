@@ -28,7 +28,7 @@ server.use(
       return res.status(err.statusCode).json({ status: 400, err: err.message })
     }
     if (err instanceof CadastroError) {
-      return res.status(err.status).json({ status: 400, err: err.message })
+      return res.status(err.status).send(err.message)
     }
 
     return res.status(500).json({ status: "error", message: `Internal server error - ${err.message}` })

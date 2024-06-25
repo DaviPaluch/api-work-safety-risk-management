@@ -1,9 +1,5 @@
-export class CadastroError {
-  public readonly err: string
+export class CadastroError extends Error {
   public readonly status: number
+  public readonly err: string
 
-  constructor(message: string, statusCode = 400) {
-    this.status = statusCode
-    this.err = message
-  }
 }
