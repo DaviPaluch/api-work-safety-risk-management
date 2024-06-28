@@ -92,7 +92,6 @@ class RiscoRepository implements IRiscoRepository {
       } : "sem plano de ação"
     }));
   }
-
 }
 
 export { RiscoRepository };
