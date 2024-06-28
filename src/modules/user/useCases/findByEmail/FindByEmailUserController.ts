@@ -10,7 +10,7 @@ class FindByEmailUserCrontroller {
     try {
       const findByEmailUserUseCase = container.resolve(FindByEmailUserUseCase)
       const exist = await findByEmailUserUseCase.execute({ email: String(email) })
-      return res.status(201).json({ status: "200", emailCadastrado: exist });
+      return res.status(200).json({ status: "200", emailCadastrado: exist });
     } catch (err) {
       return res.status(401).send(err.message);
     }

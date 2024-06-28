@@ -16,7 +16,7 @@ interface ICreateRiscoDTO {
 
 interface IRiscoRepository {
   // findByName(name: string): Promise<risco | null>
-  list(): Promise<risco[]>
+  list(): Promise<any[]>
   create({
     estrategia_resolucaoId,
     userId,

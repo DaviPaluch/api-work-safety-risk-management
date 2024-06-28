@@ -34,17 +34,65 @@ class RiscoRepository implements IRiscoRepository {
     });
   }
 
-  async list(): Promise<risco[]> {
-    const categories = await this.prisma.risco.findMany();
-    return categories;
+  async list(): Promise<any[]> {
+    const riscos = await this.prisma.risco.findMany({
+      include: {
+        impacto: {
+          include: {
+            classificacao: true
+          }
+        },
+        estrategia_resolucao: true,
+        user: true,
+        setor: true,
+        status_risco: true,
+        plano_de_acao: {
+          include: {
+            status_prazo: true
+          }
+        }
+      }
+    });
+
+    return riscos.map(risco => ({
+      id: risco.id,
+      impacto: {
+        id: risco.impacto.id,
+        desc: risco.impacto.desc,
+        classificacao: {
+          id: risco.impacto.classificacao.id,
+          label: risco.impacto.classificacao.label
+        }
+      },
+      estrategia_resolucao: {
+        id: risco.estrategia_resolucao.id,
+        label: risco.estrategia_resolucao.label
+      },
+      user: {
+        id: risco.user.id,
+        name: risco.user.name
+      },
+      setor: {
+        id: risco.setor.id,
+        label: risco.setor.label
+      },
+      status_risco: {
+        id: risco.status_risco.id,
+        label: risco.status_risco.label
+      },
+      titulo: risco.titulo,
+      desc: risco.desc,
+      plano_de_acao: risco.plano_de_acao ? {
+        id: risco.plano_de_acao.id,
+        titulo: risco.plano_de_acao.titulo,
+        status_prazo: {
+          id: risco.plano_de_acao.status_prazo.id,
+          label: risco.plano_de_acao.status_prazo.label
+        }
+      } : "sem plano de ação"
+    }));
   }
 
-  // async findByName(name: string): Promise<risco | null> {
-  //   const category = await this.prisma.risco.findFirst({
-  //     where: { nome: name }
-  //   });
-  //   return category;
-  // }
 }
 
 export { RiscoRepository };
