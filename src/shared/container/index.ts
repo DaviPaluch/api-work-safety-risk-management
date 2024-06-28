@@ -11,6 +11,8 @@ import { ISetorRepository } from "../../modules/setor/repositories/ISetorReposit
 import { SetorRepository } from "../../modules/setor/repositories/implementations/SetorRepository";
 import { IStatusRiscoRepository } from "../../modules/statusRisco/repositories/IStatusRiscoRepository";
 import { StatusRiscoRepository } from "../../modules/statusRisco/repositories/implementations/StatusRiscoRepository";
+import { IEstrategiaResolucaoRepository } from "../../modules/estrategiaResolucao/repositories/IEstrategiaResolucaoRepository";
+import { EstrategiaResolucaoRepository } from "../../modules/estrategiaResolucao/repositories/implementations/estrategiaResolucaoRepository";
 
 container.registerSingleton<IClassificacaoRepository>(
   "ClassificacaoRepository",
@@ -35,4 +37,8 @@ container.registerSingleton<ISetorRepository>(
 container.registerSingleton<IStatusRiscoRepository>(
   "StatusRiscoRepository",
   StatusRiscoRepository
+);
+container.registerSingleton<IEstrategiaResolucaoRepository>(
+  "EstrategiaResolucaoRepository",
+  EstrategiaResolucaoRepository
 );

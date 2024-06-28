@@ -5,6 +5,7 @@ import { userRoutes } from "./user.routes";
 import { authRoutes } from "./authenticate.routes";
 import { setorRoutes } from "./setor.routes";
 import { statusRiscoRoutes } from "./statusRisco.routes";
+import { estrategia_resolucaoRoutes } from "./esteategiaressosldus.routes";
 
 const router = Router()
 
@@ -14,5 +15,6 @@ router.use("/setor", setorRoutes)
 router.use("/classificacao", classificacaoRoutes)
 router.use("/user", userRoutes)
 router.use("/auth", authRoutes)
+router.use("/estrategiaResolucao", estrategia_resolucaoRoutes)
 
 export { router }
