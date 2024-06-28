@@ -17,7 +17,7 @@ class CreateUserCrontroller {
 
       return res.status(201).json({ status: "201", err: "" });
     } catch (err) {
-      return res.status(400).send(err.message);
+      return res.status(401).send(err.message);
     }
   }
 }
